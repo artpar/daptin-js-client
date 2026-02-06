@@ -264,6 +264,14 @@ export class WorldManager {
         that.modelLoader("usergroup", function (columnKeys) {
           that.jsonApi.define("usergroup", that.GetJsonApiModel(columnKeys.ColumnModel));
 
+          // Register the user-usergroup junction table for membership management
+          that.jsonApi.define("user_account_user_account_id_has_usergroup_usergroup_id", {
+            "user_account_id": {jsonApi: "hasOne", type: "user"},
+            "usergroup_id": {jsonApi: "hasOne", type: "usergroup"},
+            "reference_id": "value",
+            "permission": "value"
+          });
+
           that.modelLoader("world", function (columnKeys) {
 
             that.jsonApi.define("world", that.GetJsonApiModel(columnKeys.ColumnModel));
